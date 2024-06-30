@@ -23,6 +23,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "dayjs": "^1.11.9",
     "decode-html": "^2.0.0",
+    "html-minifier-terser": "^7.2.0",
     "html-to-text": "^9.0.5",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",

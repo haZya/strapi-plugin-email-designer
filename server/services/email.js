@@ -8,6 +8,7 @@ const isValidEmail =
 
 const decode = require('decode-html');
 const { htmlToText } = require('html-to-text');
+const { minify } = require('html-minifier-terser');
 const { isEmpty } = require('lodash');
 
 module.exports = ({ strapi }) => {
@@ -74,7 +75,12 @@ module.exports = ({ strapi }) => {
         (!isEmpty(emailTemplate.subject) && emailTemplate.subject) ||
         (!isEmpty(subject) && decode(subject)) ||
         'No Subject',
-      html: decode(bodyHtml),
+      html: await minify(decode(bodyHtml).replace(/<!--[\s\S]*?-->/g, ''), {
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+      }),
       text: decode(bodyText),
     };
 
